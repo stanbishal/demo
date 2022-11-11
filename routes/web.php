@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LinkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::post('/shorten/url',[LinkController::class,'shortenURL'])->name('shorten.url');
+
+
+Route::get('{code}',[LinkController::class,'shortLink'])->name('short.link');
 
 require __DIR__.'/auth.php';
