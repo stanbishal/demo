@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
     return $request->user();
+
 });
+
+Route::controller(ApiController::class)->name('admin.')->group(function() {
+    Route::get('/list','index')->name('index');
+    Route::get('/view/{id}','view')->name('view');
+    Route::get('/delete/{id}','delete')->name('delete');
+    Route::post('/get-link-details','getLinkDetails')->name('link-details'); 
+});
+

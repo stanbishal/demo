@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\LinkController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LinkController;
+use App\Http\Controllers\Admin\LinkController as AdminLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,6 +26,15 @@ Route::get('/dashboard', function () {
 Route::post('/shorten/url',[LinkController::class,'shortenURL'])->name('shorten.url');
 
 
-Route::get('{code}',[LinkController::class,'shortLink'])->name('short.link');
+Route::controller(AdminLinkController::class)->middleware('auth')->prefix('admin')->name('admin.')->group(function() {
+    Route::get('/list-links','index')->name('list-links');
+    Route::get('/view-link/{id}','view')->name('view-link');
+    Route::get('/delete-link/{id}','delete')->name('delete-link');
+    Route::get('/search-link','searchLinks')->name('search-links'); 
+});
+
 
 require __DIR__.'/auth.php';
+
+Route::get('{code}',[LinkController::class,'shortLink'])->name('short.link');
+

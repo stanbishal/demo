@@ -19,6 +19,7 @@ class CreateLinksTable extends Migration
             $table->string('short_url')->unique();
             $table->integer('counter')->default(0);
             $table->date('expires_on')->default(null)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

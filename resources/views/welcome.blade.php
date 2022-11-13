@@ -14,6 +14,15 @@
 </head>
 
 <body>
+
+    @guest
+    <a href="{{ route('login') }}">Log in</a>
+    @endguest
+
+    @auth
+    <a href="{{ route('admin.list-links') }}">Dashboard</a>   
+    @endauth
+
     <h1 class="text-center">Url Shortner</h1>
 
 
