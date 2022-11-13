@@ -17,4 +17,12 @@ trait ApiResponse
         ], $response_code);
     }
 
+    public function failedResponse(string $status = "failed" ,?string $message = null, int $response_code = Response::HTTP_OK): JsonResponse
+    {
+        return response()->json([
+            "message" => $message,
+            "status" => $status,
+        ], $response_code);
+    }
+
 }

@@ -21,9 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 });
 
-Route::controller(ApiController::class)->name('admin.')->group(function() {
-    Route::get('/list','index')->name('index');
-    Route::get('/view/{id}','view')->name('view');
+Route::controller(ApiController::class)->prefix('/admin')->name('admin.')->group(function() {
+    Route::get('/list/links','index')->name('index');
+    Route::get('/view/links/{id}','view')->name('view');
     Route::get('/delete/{id}','delete')->name('delete');
     Route::post('/get-link-details','getLinkDetails')->name('link-details'); 
 });

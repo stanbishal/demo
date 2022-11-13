@@ -29,4 +29,5 @@ php artisan serve
 ```
 
 No go to browser and type http://localhost:8000 to serve. 
+https://documenter.getpostman.com/view/15709846/2s8YeuKAVf Link for API Documentation.
 

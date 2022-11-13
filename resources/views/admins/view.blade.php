@@ -2,9 +2,11 @@
 
     @section('content')
         <div class="container row">
+           
             <input type="hidden" value="{{ request()->route('id') }}" id="id">
             <div class="col-md-4">
             </div>
+
             <div class="col-md-6">
                 <div class="mb-3">
                     <label class="form-label">Full URL *</label>
@@ -55,10 +57,15 @@
                 success: function(res) {
                     if(res.status == "success")
                     {
+                      
                         $('#full_url').attr('href',res.payload.original_url).text(res.payload.original_url);
                         $('#short_url').attr('href',res.payload.short_url).text(res.payload.short_url);
                         $('#expiry_date').val(res.payload.expires_on);
                         $('#counter').val(res.payload.counter);
+                    }
+                    else
+                    {
+                        alert(res.message);
                     }
                 },
 

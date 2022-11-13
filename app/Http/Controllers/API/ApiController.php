@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 
 class ApiController extends Controller
 {
@@ -29,8 +28,8 @@ class ApiController extends Controller
 
     public function view(int $id): JsonResponse
     {
-        $data = $this->link->findorfail($id);
-        return $this->successResponse($data);
+        $data = $this->link->find($id);
+        return $data ? $this->successResponse($data) : $this->failedResponse("failed",'Sorry Invalid Id');
     }
 
     public function delete(int $id): JsonResponse
@@ -41,7 +40,7 @@ class ApiController extends Controller
             $link->delete();            
             return $this->successResponse(null,"success","Deleted Successfully",Response::HTTP_OK);
         } else{
-            return $this->successResponse(null,"failed","URL not found",Response::HTTP_OK);
+            return $this->failedResponse("failed","URL not found");
         }
     }
 
@@ -50,7 +49,7 @@ class ApiController extends Controller
         $link = $this->link->where($request->field,$request->value)->first();
         return $link 
             ? $this->successResponse($link) 
-            : $this->successResponse(null,"failed","URL not found",Response::HTTP_OK); 
+            : $this->failedResponse("failed","URL not found"); 
     }
 
 }
