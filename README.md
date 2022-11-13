@@ -12,7 +12,7 @@ Follow the steps
   php artisan key:generate
 ```
 
-Now create database name "demo"
+Now create database 
 Open .env file and fill all credentials
 
 After that run following code
